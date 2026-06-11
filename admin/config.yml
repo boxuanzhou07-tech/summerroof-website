@@ -1,0 +1,58 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+
+      - name: "general"
+        label: "General"
+        file: "data/settings.json"
+        fields:
+          - { label: "Business Name", name: "business_name", widget: "string", default: "Summer Roof" }
+          - { label: "Phone Number", name: "phone", widget: "string", default: "+60 12 430 8825" }
+          - { label: "Facebook URL", name: "facebook", widget: "string", default: "https://www.facebook.com/SummerRoofInteriorDesign/" }
+
+      - name: "hero"
+        label: "Hero Section"
+        file: "data/hero.json"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string", default: "Summer Roof" }
+          - { label: "Tagline", name: "tagline", widget: "string", default: "Interior Design & Renovation" }
+          - { label: "Hero Image", name: "image", widget: "image", required: false }
+
+  - name: "projects"
+    label: "Selected Projects"
+    folder: "data/projects"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Project Title", name: "title", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Tag (e.g. Residential / Commercial)", name: "tag", widget: "string" }
+      - { label: "Thumbnail Image", name: "thumbnail", widget: "image" }
+      - label: "Layout Type"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "Before & After + Process Gallery", value: "ba+gallery" }
+          - { label: "Horizontal Scroll Gallery", value: "hscroll" }
+          - { label: "Before & After only", value: "ba" }
+      - label: "Before & After Pairs"
+        name: "pairs"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Before Image", name: "before", widget: "image" }
+          - { label: "After Image", name: "after", widget: "image" }
+      - label: "Gallery / Process Images"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "image", widget: "image" }
